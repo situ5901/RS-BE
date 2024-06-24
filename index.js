@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 const userModel = require('./models/students');
+const popModel = require('./models/popups');
 
 app.use(express.json()); // parse JSON bodies
 app.use(cors()); // enable CORS
@@ -21,6 +22,18 @@ app.get('/data', async (req, res) => {
     res.status(500).json({ message: 'Error fetching data' });
   }
 });
+
+app.get('/situ', async (req, res) => {
+  try {
+    const pops = await popModel.find().exec();
+    console.log
+    res.json(pops);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ Message: "Error fetching PopupData" });
+  }
+});
+
 
 mongoose.connect("mongodb://127.0.0.1:27017/repodb", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
