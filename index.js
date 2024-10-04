@@ -4,7 +4,7 @@ const router = require("./models/router"); // import the router
 const cors = require('cors');
 require("dotenv").config();
 const PORT = process.env.PORT || 3001;
-  
+
 const app = express();
 const userModel = require('./models/students');
 const popModel = require('./models/popups');
@@ -26,7 +26,6 @@ app.get('/data', async (req, res) => {
 app.get('/situ', async (req, res) => {
   try {
     const pops = await popModel.find().exec();
-    console.log
     res.json(pops);
   } catch (err) {
     console.error(err);
@@ -34,8 +33,8 @@ app.get('/situ', async (req, res) => {
   }
 });
 
-
-mongoose.connect("mongodb://127.0.0.1:27017/repodb", { useNewUrlParser: true, useUnifiedTopology: true })
+// Updated MongoDB connection string
+mongoose.connect("mongodb+srv://RS-Tech:er.situkumar.com@cluster0.icf0z.mongodb.net/")
   .then(() => console.log("Connected to MongoDB"))
   .catch(err => console.log(err));
 
